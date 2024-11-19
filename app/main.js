@@ -2,7 +2,7 @@ import "./style.css";
 async function getData () {
     try {
        //returns a promise
-    const response = await fetch ('https://api.disneyapi.dev/character'); 
+    const response = await fetch ('https://api.potterdb.com/v1/characters'); 
         //gaurd clause
     if(response.status != 200) {
         throw new Error(response);
@@ -12,7 +12,7 @@ async function getData () {
     console.log(data.data)
     //this is unique to this API
     // data.data.forEach((agent) => console.log(agent.name));
-    data.data.forEach((element) => document.querySelector("div").insertAdjacentHTML("afterbegin,", `<h1>${element.name}</h1>`));
+    data.data.forEach((type) => document.querySelector("div").insertAdjacentHTML("afterbegin,", `<h1>${type.name}</h1>`));
 }
 
     } catch (error) {
