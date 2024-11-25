@@ -11,7 +11,7 @@ async function getData () {
     const data = await response.json();
     console.log(data)
     data.forEach((character) => document.querySelector("div.container").insertAdjacentHTML("beforeend", 
-        `<div class="card-body border-2 "> 
+        `<div class="card-body border-2 rounded-xl "> 
             <h1 class="card-title">${character.name}</h1>
             <h2 class="text-base">${character.gender}</h2>
             <h2 class="text-base">${character.status}</h2>
@@ -26,3 +26,5 @@ async function getData () {
     }
 };
  getData ();
+
+ //second api: https://stranger-things-api.fly.dev/api/v1/characters/?perPage=40/?gender=Female
