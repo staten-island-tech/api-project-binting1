@@ -16,15 +16,23 @@ async function getData () {
             // Convert the response to JSON
             const data = await response.json();
             console.log(data);
+            // const btn = DOMSelectors.container.querySelector(`.card-body:last-child .btn`);
             data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend", 
                 `<div class="card-body border-2 rounded-xl"> 
                     <h1 class="card-title">${character.name}</h1>
                     <h2 class="text-base">${character.gender}</h2>
                     <h2 class="text-base">${character.status}</h2>
                     <img src="${character.photo}" alt="${character.name}" />
-                </div>`
-            )); 
-        }
+                    <button class="btn">more info</button>
+                </div>` 
+            ));
+
+                btn.addEventListener("click", () => {
+                moreInfo(character); // Pass the character object to moreInfo()
+            });   
+        };
+        
+            
         } catch (error) {
         alert("Hey, I could not find that agent.");
     }
@@ -32,47 +40,18 @@ async function getData () {
 
 getData();
 
-async function getFemale () {
-    document.querySelector(".btn").addEventListener("click", async function () {
-    DOMSelectors.container.innerHTML = "";
-    try { 
-        const response = await fetch("https://stranger-things-api.fly.dev/api/v1/characters/?perPage=40/&gender=Female")
-
-    if(response.status !== 200) {
-        throw new Error("failed to fetch data"); 
-    } else {
-        const data = await response.json();
-    console.log(data);
-    data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend", 
-        `<div class="card card-body border-2 rounded-xl"> 
-            <h1 class="card-title">${character.name}</h1>
-            <h2 class="text-base">${character.gender}</h2>
-            <h2 class="text-base">${character.status}</h2>
-            <img src="${character.photo}" alt="${character.name}" />
-        </div>`
-    )); 
-    } 
-    } catch (error) {
-        alert("hey"); 
-    }
-    })
-}
-getFemale ();
-
 function moreInfo () {
-    document.querySelector("div.card").addEventListener("click", function () {
-        DOMSelectors.container.innerHTML -"";
-        data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend",
-            `<div class="card-body border-2 rounded-xl"> 
-                    <h1 class="card-title">${character.name}</h1>
-                    <h2 class="text-base">${character.gender}</h2>
-                    <h2 class="text-base">${character.status}</h2>
-                    <img src="${character.photo}" alt="${character.name}" />
-                </div>`
-        ));
-    })
+    DOMSelectors.container.innerHTML = "";
+    forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend",
+        `<div class="card-body border-2 rounded-xl"> 
+                <h1 class="card-title">${character.name}</h1>
+                <h2 class="text-base">${character.gender}</h2>
+                <h2 class="text-base">${character.status}</h2>
+                <img src="${character.photo}" alt="${character.name}" />
+            </div>`
+    ));
 }; 
 
-moreInfo ();
+
 
 
