@@ -26,24 +26,35 @@ async function getData () {
                 </div>` 
             ));
             };  
-            
-            // function moreInfo () {
-            //     DOMSelectors.container.innerHTML = "";
-            //     data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend",
-            //         `<div class="card-body border-2 rounded-xl"> 
-            //         <h1 class="card-title">${character.name}</h1>
-            //         <h2 class="text-base">${character.gender}</h2>
-            //         <h2 class="text-base">${character.status}</h2>
-            //         <img src="${character.photo}" alt="${character.name}" />
-            //     </div>`
-            //  ));
-            // };
+          
+            document.querySelectorAll(".btn").forEach((button) => {
+                button.addEventListener("click", function () {
+                    const characterName = button.getAttribute("data-character"); 
+                    const character =  data.find((char) => char.name === characterName); 
+                    showMoreInfo(character); 
 
-            // document.querySelector.btn.addEventListener. function moreInfo (); 
+                });
+            });
 
         } catch (error) {
         alert("Hey, I could not find that agent.");
     }
+};
+
+// Function to show more information about the character
+function showMoreInfo(character) {
+    DOMSelectors.container.innerHTML = ""; // Clear the container
+
+    // Render the detailed info for the selected character
+    DOMSelectors.container.insertAdjacentHTML("beforeend", 
+        `<div class="card-body border-2 rounded-xl"> 
+            <h1 class="card-title">${character.name}</h1>
+            <h2 class="text-base">${character.gender}</h2>
+            <h2 class="text-base">${character.status}</h2>
+            <img src="${character.photo}" alt="${character.name}" />
+            <p>Additional information about ${character.name}</p>
+        </div>`
+    );
 };
 
 getData();
