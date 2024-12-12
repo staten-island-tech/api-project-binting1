@@ -12,20 +12,19 @@ async function getData () {
         // Guard clause for unsuccessful response
         if(response.status !== 200) {
             throw new Error("Failed to fetch data");
-        } else {
+        }
             // Convert the response to JSON
             const data = await response.json();
             console.log(data);
             data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend", 
                 `<div class="card-body border-2 rounded-xl"> 
                     <h1 class="card-title">${character.name}</h1>
-                    <h2 class="text-base">${character.gender}</h2>
+                    <h2 class="text-base">gender: ${character.gender}</h2>
                     <h2 class="text-base">${character.status}</h2>
                     <img src="${character.photo}" alt="${character.name}" />
-                    <button class="btn">more info</button>
+                    <button class="btn" data-character="${character.name}">more info</button>
                 </div>` 
             ));
-            };  
           
             document.querySelectorAll(".btn").forEach((button) => {
                 button.addEventListener("click", function () {
@@ -39,26 +38,34 @@ async function getData () {
         } catch (error) {
         alert("Hey, I could not find that agent.");
     }
+
 };
 
 // Function to show more information about the character
 function showMoreInfo(character) {
-    DOMSelectors.container.innerHTML = ""; // Clear the container
+    if (!character) {
+        alert("Character not found.");
+        return;
+    } else {
+       DOMSelectors.container.innerHTML = ""; // Clear the container
 
     // Render the detailed info for the selected character
-    DOMSelectors.container.insertAdjacentHTML("beforeend", 
-        `<div class="card-body border-2 rounded-xl"> 
+        DOMSelectors.container.insertAdjacentHTML("beforeend", 
+        `<div class="card-body border-2 w-full"> 
             <h1 class="card-title">${character.name}</h1>
             <h2 class="text-base">${character.gender}</h2>
             <h2 class="text-base">${character.status}</h2>
             <img src="${character.photo}" alt="${character.name}" />
             <p>Additional information about ${character.name}</p>
+            <button class="back-btn border-solid border-2 rounded-lg">Go Back</button>
         </div>`
-    );
+    ); 
+    }
+    
+    document.querySelector(".back-btn").addEventListener("click", function () {
+        DOMSelectors.container.innerHTML = "";
+        getData(character);
+    })
 };
 
 getData();
-
-
-
-
