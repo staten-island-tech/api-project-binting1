@@ -6,23 +6,23 @@ const DOMSelectors = {
 
 async function getData () {
     try {
-        // Fetch data from the API
+        
         const response = await fetch('https://stranger-things-api.fly.dev/api/v1/characters/?perPage=40'); 
 
-        // Guard clause for unsuccessful response
+        
         if(response.status !== 200) {
             throw new Error("Failed to fetch data");
         }
-            // Convert the response to JSON
+            
             const data = await response.json();
             console.log(data);
             data.forEach((character) => DOMSelectors.container.insertAdjacentHTML("beforeend", 
                 `<div class="card-body border-2 rounded-xl"> 
                     <h1 class="card-title">${character.name}</h1>
-                    <h2 class="text-base">gender: ${character.gender}</h2>
-                    <h2 class="text-base">${character.status}</h2>
-                    <img src="${character.photo}" alt="${character.name}" />
-                    <button class="btn" data-character="${character.name}">more info</button>
+                    <h2 class="text-base">Gender: ${character.gender}</h2>
+                    <h2 class="text-base">Living Status: ${character.status}</h2>
+                    <img class="object-cover w-64 h-80 justify-center items-center" src="${character.photo}" alt="${character.name}" />
+                    <button class="btn hover:bg-red-700 hover:text-white" data-character="${character.name}">more info</button>
                 </div>` 
             ));
           
@@ -41,23 +41,24 @@ async function getData () {
 
 };
 
-// Function to show more information about the character
+
 function showMoreInfo(character) {
     if (!character) {
         alert("Character not found.");
         return;
     } else {
-       DOMSelectors.container.innerHTML = ""; // Clear the container
+       DOMSelectors.container.innerHTML = ""; 
 
-    // Render the detailed info for the selected character
+
         DOMSelectors.container.insertAdjacentHTML("beforeend", 
-        `<div class="card-body border-2 w-full"> 
+        `<div class="card-body rounded-xl border-2 w-max justify-center items-center"> 
             <h1 class="card-title">${character.name}</h1>
-            <h2 class="text-base">${character.gender}</h2>
-            <h2 class="text-base">${character.status}</h2>
-            <img src="${character.photo}" alt="${character.name}" />
-            <p>Additional information about ${character.name}</p>
-            <button class="back-btn border-solid border-2 rounded-lg">Go Back</button>
+            <h2 class="text-base">Gender: ${character.gender}</h2>
+            <h2 class="text-base">Living Status: ${character.status}</h2>
+            <h2 class="text-base">Residence: ${character.residence}</h2>
+            <h2 class="text-base">Birth Year: ${character.born}</h2>
+            <img class="flex justify-center w-80"src="${character.photo}" alt="${character.name}"/>
+            <button class="back-btn w-64 font-medium border-solid border-2 rounded-xl hover:bg-red-700 hover:text-white">Go Back</button>
         </div>`
     ); 
     }
