@@ -69,4 +69,4 @@ function showMoreInfo(character) {
     })
 };
 
-getData();
+getData(); 
