@@ -51,17 +51,19 @@ function showMoreInfo(character) {
 
 
         DOMSelectors.container.insertAdjacentHTML("beforeend", 
-        `<div class="card-body rounded-xl border-2 w-max justify-center items-center"> 
+        `<div class="card-body flex items-center justify-center border-2 rounded-xl w-80 p-6 bg-white"> 
             <h1 class="card-title">${character.name}</h1>
             <h2 class="text-base">Gender: ${character.gender}</h2>
             <h2 class="text-base">Living Status: ${character.status}</h2>
             <h2 class="text-base">Residence: ${character.residence}</h2>
             <h2 class="text-base">Birth Year: ${character.born}</h2>
-            <img class="flex justify-center w-80"src="${character.photo}" alt="${character.name}"/>
-            <button class="back-btn w-64 font-medium border-solid border-2 rounded-xl hover:bg-red-700 hover:text-white">Go Back</button>
+            <img class="flex justify-center object-cover w-64 h-80"src="${character.photo}" alt="${character.name}"/>
+            <button class="back-btn w-64 p-2 font-medium border-solid border-2 rounded-xl hover:bg-red-700 hover:text-white">Go Back</button>
         </div>`
     ); 
     }
+    //why does the format for this page look different from the first page?
+    //how do i center the card, although it's in the same container 
     
     document.querySelector(".back-btn").addEventListener("click", function () {
         DOMSelectors.container.innerHTML = "";
